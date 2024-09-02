@@ -15,12 +15,12 @@ export default function Header({ session }: { session: Session }) {
                 MarketPlace
             </Link>
             <nav className="flex gap-4 *:rounded">
-                <button className="border border-blue-600 text-blue-600 inline-flex items-center gap-1 px-4 mr-3">
+                <Link href="/new" className="border border-blue-600 text-blue-600 inline-flex items-center gap-1 px-4 mr-3">
                     <FontAwesomeIcon icon={faPlus} className="h-4" />
                     <span>
                         Post a ad
                     </span>
-                </button>
+                </Link>
                 <span className="border-r"></span>
                 {!session?.user && (
                     <>
