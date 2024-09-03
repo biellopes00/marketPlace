@@ -1,24 +1,20 @@
+'use client';
+import UploadArea from "@/components/UploadArea";
 import Uploader from "@/components/Uploader"
 import { faImage, faLocationCrosshairs, faPhotoFilm, faPlus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { UploadResponse } from "imagekit/dist/libs/interfaces"
+import { useState } from "react";
 export default function NewAdPage() {
+    const [files, setFiles] = useState<UploadResponse[]>([]);
     return (
-        <form action="" className="max-w-xl mx-auto flex gap-12">
-
+        <form className="max-w-xl mx-auto grid grid-cols-2 gap-12">
             <div className="grow pt-8">
-                <div className="bg-gray-100 p-4 rounded">
-                    <h2 className="text-center text-xs text-gray-400 uppercase font-bold">
-                        Add photos of your products:
-                    </h2>
-                    <div className="flex flex-col">
-                        <FontAwesomeIcon icon={faImage} className="h-24 text-gray-300" />
-                        <button className="mt-2 border border-blue-600 text-blue-600 px-4 py-2 rounded inline-flex gap-1 items-center justify-center">
-                            <FontAwesomeIcon icon={faPlus} />
-                           <Uploader />
-                        </button>
-                    </div>
-                </div>
-                <div className="mt-4">
+                <UploadArea
+                    files={files}
+                    setFiles={setFiles}
+                />
+                <div className="mt-8">
                     <label htmlFor="">Where is it located?</label>
                     <button className="w-full flex items-center gap-1 py-1 justify-center border border-blue-600 text-blue-600 rounded">
                         <FontAwesomeIcon icon={faLocationCrosshairs} />
