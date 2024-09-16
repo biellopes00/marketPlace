@@ -17,3 +17,13 @@ label.upload-btn input[type="file"] {
     @apply hidden;
 }
 
+label.radio-btn{
+    @apply has-[:checked]:bg-blue-100 rounded-md py-1 px-1 flex items-center gap-2 my-0;
+}
+
+label.radio-btn span.icon{
+    @apply  size-12 bg-gray-200 rounded-full flex items-center justify-center;
+}
+label.radio-btn svg{
+    @apply h-4;
+}

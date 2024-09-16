@@ -8,10 +8,14 @@ export async function GET(req: Request, res: Response) {
     const { searchParams } = new URL(req.url)
 
     const phrase = searchParams.get('phrase');
+    const category = searchParams.get('category');
 
     const filter: FilterQuery<Ad> = {};
     if (phrase) {
         filter.title = { $regex: '.*' + phrase + '.*', $options: 'i' };
+    }
+    if (category) {
+        filter.category = category;
     }
     const adDocs = await AdModel.find(filter, null, { sort: { createAd: -1 } });
     return Response.json(adDocs)

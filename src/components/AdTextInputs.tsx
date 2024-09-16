@@ -1,3 +1,5 @@
+import { categories } from "@/libs/helpers";
+
 export default function AdTextInput(){
     return(
         <>
@@ -10,9 +12,10 @@ export default function AdTextInput(){
                 <label htmlFor="categoryIn">Category</label>
                 <select name="category" id="categoryIn" defaultValue="0">
                     <option disabled value="0">Select a category</option>
-                    <option value="cars">Cars</option>
-                    <option value="electronics">Eletronics</option>
-                    <option value="properties">Properties</option>
+                    {Object.keys(categories).map(categoryKey => (
+                        // eslint-disable-next-line react/jsx-key
+                        <option value="categoryKey">{categories[categoryKey]}</option>
+                    ))}
                 </select>
 
                 <label htmlFor="descriptionIn">Description</label>
