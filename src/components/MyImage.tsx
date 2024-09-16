@@ -33,15 +33,18 @@ type MyImageProps = ImageProps & {
     width: number;
 }
 
-const MyImage = (props: MyImageProps) => {
+const MyImage = ({ width, height, aiCrop, ...props }: MyImageProps) => {
     return (
+        // eslint-disable-next-line jsx-a11y/alt-text
         <Image
             loader={args => imagekitLoader({
                 ...args,
-                height: props.height,
-                aiCrop: props.aiCrop,
-                width: props.width
+                height,
+                aiCrop,
+                width
             })}
+            width={width}
+            height={height}
             {...props}
         />
     )

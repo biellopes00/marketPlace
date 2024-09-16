@@ -61,7 +61,9 @@ export default function Gallery({ files }: { files: UploadResponse[] }) {
             <div className="p-4 flex gap-4 justify-center relative z-10">
                 {files.map(file => (
                     // eslint-disable-next-line react/jsx-key
-                    <div className="size-14 cursor-pointer rounded overflow-hidden">
+                    <div
+                        key={file.fileId}
+                        className="size-14 cursor-pointer rounded overflow-hidden">
                         <UploadThumbnail
                             onClick={() => setActiveFile(file)}
                             file={file} />

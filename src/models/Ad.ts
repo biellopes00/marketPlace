@@ -2,6 +2,7 @@ import { UploadResponse } from 'imagekit/dist/libs/interfaces/UploadResponse';
 import { Model, model, models, Schema } from 'mongoose'
 
 export type Ad = {
+    _id: string;
     title: string;
     price: number;
     category: string;
