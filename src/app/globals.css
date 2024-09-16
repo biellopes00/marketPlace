@@ -2,12 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-input[type="text"], input[type="number"], select, textarea{
+input[type="text"],
+input[type="number"],
+select,
+textarea {
     @apply w-full border p-2 rounded;
 }
-form label{
+
+label {
     @apply text-xs text-gray-600 font-bold uppercase mt-4 mb-1 block;
 }
-label.upload-btn input[type="file"]{
+
+label.upload-btn input[type="file"] {
     @apply hidden;
 }
+

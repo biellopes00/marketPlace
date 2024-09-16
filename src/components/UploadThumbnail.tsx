@@ -1,12 +1,28 @@
-/* eslint-disable @next/next/no-img-element */
 import { UploadResponse } from "imagekit/dist/libs/interfaces";
+import MyImage from "./MyImage";
+type Props = {
+    file: UploadResponse;
+    onClick?: () => void;
+}
 
-export default function UploadThumbnail({ file }: { file: UploadResponse }) {
+export default function UploadThumbnail({ file, onClick }: Props) {
+    function handleClick(ev: React.MouseEvent) {
+        if (onClick) {
+            ev.preventDefault();
+            return onClick()
+        }
+        location.href = file.url
+    }
     if (file.fileType === 'image') {
         return (
-            // eslint-disable-next-line react/jsx-no-comment-textnodes
-            <a href={file.url} target="_blank">
-                <img src={file.url + '?tr=w-100,h-100,fo-auto'} alt="thumbnail" />
+            <a onClick={handleClick} target="_blank">
+                <MyImage
+                    width={300}
+                    height={300}
+                    src={file.filePath}
+                    alt="thumbnail"
+                    aiCrop={true}
+                />
             </a>
 
         )

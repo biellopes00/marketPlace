@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { UploadResponse } from "imagekit/dist/libs/interfaces";
 import { useState } from "react";
 import { createAd } from "../actions/adActions";
+import SubmitButton from "@/components/SubmitButton";
+import { redirect } from "next/navigation";
 
 
 const locationDefault = {
@@ -18,7 +20,6 @@ export default function NewAdPage() {
     const [files, setFiles] = useState<UploadResponse[]>([]);
     const [location, setLocation] = useState<Location>(locationDefault);
     const [gpsCoords, setGpsCoords] = useState<Location | null>(null);
-    const [isSaving, setisSaving] = useState<boolean>(false)
 
 
     function handleFindMyPositionClick() {
@@ -30,11 +31,10 @@ export default function NewAdPage() {
     }
 
     async function handleSubmit(formData: FormData) {
-        setisSaving(true)
         formData.set('location', JSON.stringify(location));
-        formData.set('files', JSON.stringify(files))
-        const result = await createAd(formData)
-        setisSaving(false)
+        formData.set('files', JSON.stringify(files));
+        const result = await createAd(formData);
+        redirect('/ad/'+result._id)
     }
 
     return (
@@ -73,10 +73,7 @@ export default function NewAdPage() {
 
             <div className="grow pt-2">
                 <AdTextInput />
-                <button className="mt-2 bg-blue-600 text-white px-6 py-2 rounded">
-                    {isSaving ? 'Saving...' : 'Publish'}
-
-                </button>
+                <SubmitButton>Publish</SubmitButton>
             </div>
         </form>
     )

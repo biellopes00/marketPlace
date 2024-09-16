@@ -6,9 +6,9 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Session } from "next-auth";
 import Image from "next/image";
 
-export default function Header({ session }: { session: Session }) {
+export default function Header({ session }: { session: Session | null }) {
     return (
-        <header className="border-b p-4 flex justify-between items-center">
+        <header className="border-b p-4 flex justify-between items-center h-16">
             <Link href="/"
                 className="text-zinc-900 font-bold text-2xl"
             >
