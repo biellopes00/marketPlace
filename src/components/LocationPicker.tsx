@@ -1,6 +1,6 @@
 'use effect'
 import { Loader } from "@googlemaps/js-api-loader"
-import { createRef, useEffect} from "react"
+import { createRef, useEffect } from "react"
 
 
 export type Location = {
@@ -45,7 +45,7 @@ export default function LocationPicker({
             onChange({ lat, lng })
         })
     }
-    
+
     useEffect(() => {
         loadMap();
     }, [gpsCoords]);

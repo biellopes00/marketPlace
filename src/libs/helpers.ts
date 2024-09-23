@@ -13,3 +13,4 @@ export const categories = [
 
 ]
 
+export const defaultRadius = 50 * 1000;

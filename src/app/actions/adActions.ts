@@ -7,6 +7,7 @@ import { authOption } from "../api/auth/[...nextauth]/route";
 
 async function connect() {
     return mongoose.connect(process.env.MONGODB_URL as string)
+
 }
 
 export async function createAd(formData: FormData) {
