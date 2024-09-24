@@ -1,6 +1,8 @@
 import { connect } from "@/libs/helpers";
 import { Ad, AdModel } from "@/models/Ad";
 import { FilterQuery, PipelineStage } from "mongoose";
+import { getServerSession } from "next-auth";
+import { authOption } from "../auth/[...nextauth]/route";
 
 export async function GET(req: Request, res: Response) {
     await connect();
@@ -22,9 +24,6 @@ export async function GET(req: Request, res: Response) {
     if (category) {
         filter.category = category;
     }
-
-
-
 
     if (min && !max) filter.price = { $gte: min }
     if (max && !min) filter.price = { $lte: max }
@@ -53,4 +52,17 @@ export async function GET(req: Request, res: Response) {
 
     const adDocs = await AdModel.aggregate(aggregationSteps)
     return Response.json(adDocs)
+}
+
+export async function DELETE(req: Request) {
+    const url = new URL(req.url);
+    const id = url.searchParams.get('id')
+    await connect()
+    const adDoc = await AdModel.findById(id)
+    const session = await getServerSession(authOption)
+    if (!adDoc || adDoc.userEmail !== session?.user?.email) {
+        return Response.json(false);
+    }
+    await AdModel.findByIdAndDelete(id)
+    return Response.json(true)
 }

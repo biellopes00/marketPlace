@@ -1,8 +1,16 @@
 'use server';
 
+import { authOption } from "@/app/api/auth/[...nextauth]/route";
+import DeleteAdButton from "@/components/DeleteAdButton";
+import DeleteButton from "@/components/DeleteAdButton";
 import Gallery from "@/components/Gallery";
-import { connect } from "@/libs/helpers";
+import LocationMap from "@/components/LocationMap";
+import { connect, formatMoney } from "@/libs/helpers";
 import { AdModel } from "@/models/Ad";
+import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getServerSession } from "next-auth";
+import Link from "next/link";
 
 
 type Props = {
@@ -14,7 +22,8 @@ type Props = {
 }
 export default async function SingleAdPage(args: Props) {
     await connect();
-    const adDoc = await AdModel.findById(args.params.id)
+    const adDoc = await AdModel.findById(args.params.id);
+    const session = await getServerSession(authOption);
 
     if (!adDoc) {
         return 'Not found'
@@ -25,14 +34,26 @@ export default async function SingleAdPage(args: Props) {
                 <Gallery files={adDoc.files} />
             </div>
 
-            <div className="w-2/5 p-8 grow shrink-0">
+            <div className="w-2/5 p-8 grow shrink-0 overflow-y-scroll">
                 <h1 className="text-lg font-bold">{adDoc.title}</h1>
+                {session && session?.user?.email === adDoc.userEmail && (
+                    <div className="mt-2 flex gap-2">
+                        <Link href={`/edit/${adDoc._id}`} className="border rounded-md py-1 px-4 border-blue-600 text-blue-600 inline-flex gap-1 items-center cursor-pointer">
+                            <FontAwesomeIcon icon={faPencil} />
+                            <span>Edit</span>
+                        </Link>
+                        <DeleteAdButton id={adDoc._id} />
+                    </div>
+                )}
+                <label>Price</label>
+                <p>{formatMoney(adDoc.price)}</p>
                 <label>Category</label>
                 <p>{adDoc.category}</p>
                 <label>Description</label>
                 <p className="text-sm">{adDoc.description}</p>
                 <label>Contact </label>
                 <p>{adDoc.contact}</p>
+                <LocationMap className="w-full h-48" location={adDoc.location} />
             </div>
         </div>
     )

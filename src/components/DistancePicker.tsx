@@ -18,6 +18,15 @@ export default function DistancePicker({
     useEffect(() => {
         if (center) {
             loadMap();
+            if (window && window.localStorage) {
+                window.localStorage.setItem('center', JSON.stringify(center))
+            }
+        }
+        if (!center) {
+            if (window && window.localStorage && window.localStorage.getItem('center')) {
+                const centerFromLS = window.localStorage.getItem('center') || '';
+                setCenter(JSON.parse(centerFromLS))
+            }
         }
 
     }, [center]);
