@@ -37,8 +37,8 @@ export default function AdTextInput({ defaultValues }: Props) {
             <select name="category" id="categoryIn" defaultValue={defaultValues.category}>
                 <option disabled value="0">Select a category</option>
                 {categories.map(({ key: categoryKey, label: categoryLabel }) => (
-                    // eslint-disable-next-line react/jsx-key
-                    <option value={categoryKey}>{categoryLabel}</option>
+                    
+                    <option value={categoryKey} key={categoryKey}>{categoryLabel}</option>
                 ))}
             </select>
 

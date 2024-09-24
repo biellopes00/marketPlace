@@ -42,8 +42,8 @@ export default function SearchForm({ action }: Props) {
                     defaultChecked={true}
                 />
                 {categories.map(({ key: categoryKey, label, icon }) => (
-                    // eslint-disable-next-line react/jsx-key
                     <LabelRadioButton
+                        key={categoryKey}
                         name={'category'}
                         value={categoryKey}
                         icon={icon}

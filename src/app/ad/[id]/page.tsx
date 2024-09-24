@@ -5,7 +5,7 @@ import DeleteAdButton from "@/components/DeleteAdButton";
 import DeleteButton from "@/components/DeleteAdButton";
 import Gallery from "@/components/Gallery";
 import LocationMap from "@/components/LocationMap";
-import { connect, formatMoney } from "@/libs/helpers";
+import { connect, formatDate, formatMoney } from "@/libs/helpers";
 import { AdModel } from "@/models/Ad";
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -54,6 +54,10 @@ export default async function SingleAdPage(args: Props) {
                 <label>Contact </label>
                 <p>{adDoc.contact}</p>
                 <LocationMap className="w-full h-48" location={adDoc.location} />
+                <p className="text-xs mt-4 text-gray-400">
+                    Posted: {formatDate(adDoc.createdAt)}<br />
+                    Last update: {formatDate(adDoc.updatedAt)}
+                </p>
             </div>
         </div>
     )

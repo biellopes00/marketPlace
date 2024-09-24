@@ -47,15 +47,14 @@ export default function UploadArea({ files, setFiles }: Props) {
                         </>
                     )}
                 </label>
-                <div 
+                <div
                     className="flex flex-wrap gap-2 mt-2"
                 >
                     {files.map(file => (
-                        // eslint-disable-next-line react/jsx-key
-                        <div className="size-16 rounded overflow-hidden">
-                             <UploadThumbnail file={file} />
+                        <div key={file.fileId} className="size-16 rounded overflow-hidden">
+                            <UploadThumbnail file={file} />
                         </div>
-                       
+
                     ))}
                 </div>
             </div>

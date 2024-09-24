@@ -15,4 +15,8 @@ export const categories = [
 export function formatMoney(amount: number) {
     return '$' + Intl.NumberFormat('US', { currency: 'USD' }).format(amount)
 }
+
+export function formatDate(date:Date):string{
+    return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+}
 export const defaultRadius = 50 * 1000;
